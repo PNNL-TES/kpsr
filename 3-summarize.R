@@ -124,7 +124,7 @@ save_plot("raw_ch4_by_valve", ptype = ".png")
 # The 'valvemap' data maps Picarro valve numbers to sample IDs
 printlog(SEPARATOR)
 printlog("Reading valve and core mapping data...")
-read_csv("trial_valvemap.csv", na = c("NA", "#VALUE!", "NO VALVE", "NO WEIGHT", "", "DATA?")) %>% 
+read_csv("data/trial_valvemap.csv") %>% 
   mutate(rownum = row_number()) %>% 
   filter(!is.na(SampleID)) %>%
   mutate(Picarro_start = mdy_hm(Start_Date_Time, tz = "America/Los_Angeles"),
@@ -133,14 +133,13 @@ read_csv("trial_valvemap.csv", na = c("NA", "#VALUE!", "NO VALVE", "NO WEIGHT", 
   select(rownum, SampleID, TREATMENT_PHASE, sequence_valve,
          Picarro_start,
          Picarro_stop, 
-         Total_core_mass_pot_pie_pans_g, Additional_Wt_toRemove) %>% 
+         Total_core_mass_pot_pie_pans_g) %>% 
   arrange(Picarro_start) ->
   valvemap
 
 # The `gs_key` file maps SampleID to (at the moment) core dry mass and pH
-read_csv("trial_sampleID.csv") %>% 
+read_csv("data/trial_sampleID.csv") %>% 
   select(SampleID, Site, Treatment, HeadSpace_Ht_cm, 
-         soil_pH_water_airdried, 
          DryMass_SoilOnly_g, DryMass_NONsoil_ALL_g, VolumeSoil_cm3) %>% 
   right_join(valvemap, by = "SampleID") ->
   valvemap
@@ -151,47 +150,11 @@ valvemap %>%
   geom_point() +
   theme(axis.text.x = element_text(angle = 90))
 save_plot("diag_DryMass_SoilOnly_g", width = 8, height = 4)
-#
-
-# KAIZAD: don't use this section, replaced by section above -----------------------------------------------------------------------------
-# The 'valvemap' data maps Picarro valve numbers to sample IDs
-printlog(SEPARATOR)
-printlog("Reading valve and core mapping data...")
-read_csv(VALVEMAP_FILE, na = c("NA", "#VALUE!", "NO VALVE", "NO WEIGHT", "", "DATA?")) %>% 
-  mutate(rownum = row_number()) %>% 
-  filter(!is.na(SampleID)) %>%
-  mutate(Picarro_start = mdy_hm(Start_Date_Time, tz = "America/Los_Angeles"),
-         Picarro_stop = mdy_hm(Stop_Date_Time, tz = "America/Los_Angeles"),
-         sequence_valve = as.numeric(sequence_valve)) %>% 
-  select(rownum, SampleID, TREATMENT_PHASE, sequence_valve,
-         Picarro_start,
-         Picarro_stop, 
-         Total_core_mass_pot_pie_pans_g, Additional_Wt_toRemove) %>% 
-  arrange(Picarro_start) ->
-  valvemap
-
-# The `gs_key` file maps SampleID to (at the moment) core dry mass and pH
-read_csv(KEY_FILE) %>% 
-  select(SampleID, Site, Treatment, HeadSpace_Ht_cm, 
-         soil_pH_water_airdried, 
-         DryMass_SoilOnly_g, DryMass_NONsoil_ALL_g, VolumeSoil_cm3) %>% 
-  right_join(valvemap, by = "SampleID") ->
-  valvemap
-
-# valvemap diagnostic
-valvemap %>% 
-  ggplot(aes(SampleID, DryMass_SoilOnly_g, color = Site)) + 
-  geom_point() +
-  theme(axis.text.x = element_text(angle = 90))
-save_plot("diag_DryMass_SoilOnly_g", width = 8, height = 4)
-
 
 # -----------------------------------------------------------------------------
 # Compute concentration changes and match the Picarro data with valvemap data
 ## KAIZAD: ISSUES HERE ---------------###-------
 printlog( "Computing summary statistics for each sample..." )
-
-rawdata_samples=read_csv("rawdata_samples.csv")
 
 rawdata_samples %>% 
   ungroup %>% 

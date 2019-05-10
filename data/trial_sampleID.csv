@@ -1,6 +1,6 @@
-﻿SampleID,Site,CoreNo,Treatment,date_collected,date_incubated,date_saturated,date_deconstructed,HeadSpace_Ht_cm,DryMass_SoilOnly_g,DryMass_NONsoil_ALL_g,VolumeSoil_cm3,soil_pH_water_airdried,DryMass_RocksRoots_g,PotPieTin+BottomCap+Liner_g,WSOC_mgC/gsoil,WSOC_mg/L,%C,%OC,Notes
-Water,BC15,A,Water,9/18/16,,,,2.6,25.49,11.5,34.6185,,0,11.5,0.08,,7,,
-Gluc1,BC15,B,Dextrose1,9/18/16,,,,3,24.78,11.5,31.7925,,0,11.5,0.08,,7,,
-Gluc2,BC15,163,Dextrose2,9/18/16,,,,2.2,21.51,11.5,37.4445,,0,11.5,0.08,,7,,
-Gluc3,BC15,164,Dextrose3,9/18/16,,,,2.2,23.42,11.5,37.4445,,0,11.5,0.08,,7,,
-Gluc4,BC15,165,Dextrose4,9/18/16,,,,3,20.91,11.5,31.7925,,0,11.5,0.08,,7,,
+SampleID,Site,CoreNo,Treatment,date_collected,HeadSpace_Ht_cm,DryMass_SoilOnly_g,DryMass_NONsoil_ALL_g,VolumeSoil_cm3,DryMass_RocksRoots_g,PotPieTin+BottomCap+Liner_g,WSOC_mgC/gsoil,WSOC_mg/L,%C,%OC,Notes
+Water,BC15,A,Water,9/18/16,2.6,25.49,11.5,34.6185,0,11.5,0.08,,7,,
+Gluc1,BC15,B,Dextrose1,9/18/16,3,24.78,11.5,31.7925,0,11.5,0.08,,7,,
+Gluc2,BC15,163,Dextrose2,9/18/16,2.2,21.51,11.5,37.4445,0,11.5,0.08,,7,,
+Gluc3,BC15,164,Dextrose3,9/18/16,2.2,23.42,11.5,37.4445,0,11.5,0.08,,7,,
+Gluc4,BC15,165,Dextrose4,9/18/16,3,20.91,11.5,31.7925,0,11.5,0.08,,7,,
