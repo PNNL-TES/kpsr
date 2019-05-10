@@ -8,7 +8,7 @@ source("0-functions.R")
 SCRIPTNAME  	<- "2-data.R"
 PROBLEM       <- FALSE
 
-PICARRO_DATA_DIR      <- file.path("Test")
+PICARRO_DATA_DIR      <- file.path("data/Test")
 
 # -----------------------------------------------------------------------------
 # scan a directory and process all files in it, returning tempfile names

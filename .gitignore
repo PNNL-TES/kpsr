@@ -35,4 +35,9 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 .Rproj.user
+
+# OS files
 .DS_Store
+
+# Don't track script outputs
+outputs/
