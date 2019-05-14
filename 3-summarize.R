@@ -137,7 +137,7 @@ read_csv("data/trial_valvemap.csv") %>%
   arrange(Picarro_start) ->
   valvemap
 
-# The `gs_key` file maps SampleID to (at the moment) core dry mass and pH
+# The `sampleID` file maps SampleID to (at the moment) core dry mass and pH
 read_csv("data/trial_sampleID.csv") %>% 
   select(SampleID, Site, Treatment, HeadSpace_Ht_cm, 
          DryMass_SoilOnly_g, DryMass_NONsoil_ALL_g, VolumeSoil_cm3) %>% 
@@ -163,8 +163,6 @@ rawdata_samples %>%
          elapsed_seconds >= MIN_MEASUREMENT_TIME) %>% 
   # find max CO2 time for each sample
   group_by(samplenum) %>% 
-  
-##KAIZAD: N is number of timepoints with max-CO2
   mutate(N = n(),
          max_co2_time = nth(elapsed_seconds, which.max(CO2_dry))) %>%
   # filter for at least 3 data points and for max CO2 time window
