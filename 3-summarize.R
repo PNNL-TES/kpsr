@@ -1,4 +1,4 @@
-# Process Picarro data for 3soils lab experiment
+# Process Picarro data for Kaizad's Secret River experiment
 # This workhorse script summarizes individual (raw) Picarro observations to 
 # summaries of "samples" (groups of consecutive observations made from a given 
 # core at a point in time). It computes gas concentration changes, performs 
@@ -87,11 +87,10 @@ rawdata %>%
   rawdata_samples
 
 printlog("Removing ambient and very long samples...")
-AMBIENT_VALVE <- 16
+EXPERIMENT_VALVES <- 1:5
 rawdata_samples %>%
-  filter(MPVPosition != AMBIENT_VALVE, 
+  filter(MPVPosition %in% EXPERIMENT_VALVES, 
          elapsed_seconds < MAX_MEASUREMENT_TIME) %>% 
-  group_by(samplenum) %>%
   print_dims("rawdata_samples") ->
   rawdata_samples
 
@@ -153,7 +152,6 @@ save_plot("diag_DryMass_SoilOnly_g", width = 8, height = 4)
 
 # -----------------------------------------------------------------------------
 # Compute concentration changes and match the Picarro data with valvemap data
-## KAIZAD: ISSUES HERE ---------------###-------
 printlog( "Computing summary statistics for each sample..." )
 
 rawdata_samples %>% 
